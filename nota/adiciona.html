@@ -1,0 +1,70 @@
+<div id="cabeca" style="background: white;">
+        <input type="text" id="pesquisar" placeholder="Titulo" maxlength="30" autocomplete="off" class="inputTarefa">
+        <input type="hidden" id="id">
+        <div class="quadrado" onclick="Nota.Modal()"> </div>
+        <div class="quadrado" onclick="Nota.SalvaNota()" id="salvar">  </div>
+</div>
+
+        <div id="modalInfo" class="modalRapido">
+                <div class="rapidoOverlay" ></div>
+                <div class="rapidoConteudo">
+                        <div style="display:block;width:100%;margin:1%;z-index: 999;padding:5px;">
+                                <style>
+                                    .caixaCor{display: inline-block; width: 19.5%; height:50px; margin:1.5%;}
+                                    .caixaCor:hover{opacity:.3;}
+            
+                                    .escura{background: #000;}
+                                    .vinho{background: rgba(120,0,220);}
+                                    .azul{background: #0099ff50;}
+                                    .amarela{background: rgba(255,255,0,.6);}
+                                    .cinza{background: #aaa;}
+                                    .vermelho{background: red;}
+                                    .laranja{background: #ff9900;}
+                                    .verde{background: #009900;}
+                                    input[type="radio"]{display: none;}
+                                    
+                                </style>
+                                <form action="::javascript">
+                                    <input type="radio" id="escura" name="Cor" value="escura">
+                                    <label for="escura"><div onclick="Nota.FechaModal()" class="caixaCor escura"> </div></label>
+                                    <input type="radio" id="vinho" name="Cor" value="vinho">
+                                    <label for="vinho"><div onclick="Nota.FechaModal()" class="caixaCor vinho"> </div></label>
+                                    <input type="radio" id="azul" name="Cor" value="azul">
+                                    <label for="azul" ><div onclick="Nota.FechaModal()" class="caixaCor azul"> </div></label>
+                                    <input type="radio" id="amarela" name="Cor" value="amarela">
+                                    <label for="amarela" ><div onclick="Nota.FechaModal()" class="caixaCor amarela"> </div></label>
+                                    
+                                    <input type="radio" id="cinza" name="Cor" value="cinza">
+                                    <label for="cinza"><div onclick="Nota.FechaModal()" class="caixaCor cinza"> </div></label>
+                                    <input type="radio" id="vermelho" name="Cor" value="vermelho">
+                                    <label for="vermelho"><div onclick="Nota.FechaModal()" class="caixaCor vermelho"> </div></label>
+                                    <input type="radio" id="laranja" name="Cor" value="laranja">
+                                    <label for="laranja" ><div onclick="Nota.FechaModal()" class="caixaCor laranja"> </div></label>
+                                    <input type="radio" id="verde" name="Cor" value="verde">
+                                    <label for="verde" ><div onclick="Nota.FechaModal()" class="caixaCor verde"> </div></label>
+                                  
+                                  </form>
+                            </div>
+                            <div class="duplo">
+                                    <button id="querApagar" type="button" class="btn btn-g" src="javascript::" onclick="Nota.QuerApagar()"> Apagar </button>
+                                    <div class="div_apagar">
+                                        <p> Tem certeza ? </p> 
+                                        <button class="btn sim" onclick="Nota.ApagaNota()"> Sim </button>
+                                        <button class="btn nao" onclick="Nota.QuerApagar()"> Não </button>
+                                    </div>
+                            </div>
+                            <div  class="duplo">
+                                   
+                            </div>
+                </div>
+                    
+            </div>
+            
+    <!-- Create the editor container -->
+<div id="editor">
+    <p><br></p>
+</div>
+
+<script>
+
+</script>
