@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cinzento</title>
+    <link rel="stylesheet" href="arq/quill.snow.css">
+    <link rel="stylesheet" href="arq/quill.css">
+    <link rel="stylesheet" href="arq/animate.css">
+    <link rel="stylesheet" href="arq/hover.css">
+    <link rel="stylesheet" href="calendario/css.css">
+    <link rel="stylesheet" href="arq/style.css">
+
+    <script src="arq/localforage.js"></script>
+    <script>
+        var tbNotas = localforage.createInstance({
+            name: "notas"
+        });
+        var tbControle = localforage.createInstance({
+            name: "controle"
+        });
+        var tbTarefas = localforage.createInstance({
+            name: "tarefas"
+        });
+        var tbBuffer = localforage.createInstance({
+            name: "buffer"
+        });
+        var tbAuth = localforage.createInstance({
+            name: "Auth"
+        });
+    </script>
+    <script src="arq/quill.js"></script>
+    <script src="arq/jquery.js"></script>
+    <script src="calendario/tarefaComponent.js"></script>
+    <script src="calendario/fncs.js"></script>
+    <script src="calendario/js.js"></script>
+</head>
+
+<body>
+    <div class="divLoad">
+        <img src="icones/load.gif" style="width: 30%;display: block;margin: 200px auto;">
+    </div>
+    <div id="app">
+
+
+        <div id="cabeca" class="cabeca">
+
+            <a id="voltar" onclick="AbreDef()" class="hvr-grow-shadow" style="margin:0;padding: 0;"><img src="icones/menu.png" style="display:inline-block;width: 76%;"></a>
+            <a id="acao" onclick="vaiTelaDois()" class="hvr-grow-shadow"><img src="icones/nota.png" style="display:inline-block;width: 80%;"></a>
+            <a id="acao" onclick="AbrePes()" class="hvr-grow-shadow"><img src="icones/procurar.png" style="display:inline-block;width: 80%;"></a>
+        </div>
+
+
+        <div class="modalPes" style="position: fixed;top:0;left: 0%;width: 100%;height: 100%;background: #fff;z-index: 999;display: none;">
+            <div id="cabeca" class="cabeca" style="position: relative;">
+                <img src="icones/voltar.png" style="position: absolute;top: 7.5px; left:3%;width:7%;z-index: 1030;" onclick="history.back()">
+                <input type="text" class="inputPes" id="procurar" oninput="procurar()" placeholder="Procurar" autocomplete="off">
+                <img src="icones/fechar.png" style="position: absolute;top: 7.5px; right:3%;width:7%;z-index: 1030;display: none;" id="limpaProcurar" onclick="limpaProcurar()">
+            </div>
+            <div id="elementosPesq">
+
+            </div>
+        </div>
+
+
+        <!---    COMEÇA MODAL DEF NA TELA UM      -->
+        <div class="modalDef" style="position: fixed;top:0;left: 0;width: 100%;height: 100%;background: #aaa;z-index: 999;display: none;">
+            <div id="divConexao">
+                <div id="divAuthTrue">
+                    <img src="icones/fechar.png" style="position: absolute;top:10px;right: 10px;width: 5%;z-index:999;" onclick="FechaDef()">
+                    <div style="width:100%;height:200px;display:block;clear:both;"></div>
+                    <img src="icones/sync.gif" style="width:60%;display:block;margin:10px auto;" id="img-sync">
+                    <p>Última sincronização</p>
+                    <p id="lastSync"></p>
+                    <button type="button" onclick="sync()" id="botaoSincronizar"> Sincronizar </button>
+                    <h5 style="color:red;font-weight:500;position:fixed;bottom:20px;right:10%;" onclick="desconectar()">Desconectar</h5>
+
+                </div>
+
+                <div id="scrollConexao">
+
+                    <div id="conectar-se" style="background: #009955;">
+                        <img src="icones/fechar.png" style="position: absolute;top:10px;right: 10px;width: 5%;z-index:999;" onclick="FechaDef()">
+                        <h2>Backup na nuvem</h2>
+
+                        <div class="div_form">
+                            <input type="email" placeholder="email" id="email_conectar" autocomplete="off">
+                            <input type="password" placeholder="password" id="pass_conectar">
+                            <button type="button" onclick="conectar()" id="botaConectar"> Conectar </button>
+                            <div style="display: block;width: 100%;height:10px;clear: both;"></div>
+                            <a href="#esqueci-passe" class="esqueci-passe"> Esqueci a password </a>
+                        </div>
+                        <div class="div_baixa">
+                            <a href="#registar-se"> Registar-se </a>
+                        </div>
+
+                    </div>
+
+                    <div id="renovar-passe" style="background: #888800;">
+                        <h2>Insira o número de verificação que recebeu no email e a nova palavra passe</h2>
+                        <div class="div_form">
+                            <input type="text" placeholder="Número de verificação" class="inputText" id="NumVerify" autocomplete="off">
+                            <input type="password" placeholder="password" id="NumPas">
+                            <input type="password" placeholder="repetir password" id="NumPass">
+                            <button type="button" onclick="renovaPasse()"> Renovar </button>
+
+                        </div>
+                        <h4 style="color:red;font-weight:500;text-align: center;" onclick="repetirRenovacao()">Repetir processo</h4>
+                        <div class="div_baixa">
+
+                        </div>
+                    </div>
+
+                    <div id="esqueci-passe" style="background: #0099;">
+                        <h2>Insira o seu email</h2>
+                        <p style="text-align: center;">Receberá um codigo de 10 caracteres<br>para usar na renovação da password</p>
+                        <div class="div_form">
+
+                            <input type="email" placeholder="email" id="esqueci-passeEmail" autocomplete="off">
+                            <button type="button" onclick="esqueciPasse()"> Continuar </button>
+                        </div>
+                        <div class="div_baixa">
+
+                        </div>
+                    </div>
+
+                    <div id="registar-se" style="background: #009999;">
+                        <h2>É rapido e fácil</h2>
+                        <div class="div_form">
+                            <input type="email" placeholder="email" id="reg_email" autocomplete="off">
+                            <input type="password" placeholder="password" id="reg_pas">
+                            <input type="password" placeholder="repetir password" id="reg_pass">
+                            <button type="button" onclick="cadastrar()" id="botaoCadastrar"> Registar-se </button>
+                        </div>
+                        <div class="div_baixa">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!---    COMEÇA TELA UM      -->
+        <div id="tela">
+            <div id="scrollHome">
+                <div id="elementos">
+
+                </div>
+                <div id="wrapper">
+                    <div class="modales"></div>
+                    <div id="calendari"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!---    COMEÇA TELA DOIS      -->
+        <div id="telaDois" style="position: relative;">
+            <div id="cabeca" style="background: white;width:95.5%;">
+                <input type="text" id="pesquisar" placeholder="Titulo" maxlength="50" autocomplete="off" class="inputTarefa">
+                <input type="hidden" id="id">
+                <input type="hidden" id="chave" value="0">
+                <button class="quadrado" id="salvar" onclick="history.back()">  </button>
+                <button class="quadrado" onclick="Modal()" id="modalQua">  </button>
+            </div>
+
+            <div id="modalInfo" class="modalRapidoo" style="display:none;z-index: 999;">
+                <div class="rapidoOverlayy"></div>
+                <div class="rapidoConteudo" id="background">
+                    <div style="display:block;width:100%;margin:1%;z-index: 999;padding:5px;">
+                        <style>
+                            .caixaCor {
+                                display: inline-block;
+                                width: 19.5%;
+                                height: 50px;
+                                margin: 1.5%;
+                            }
+                            
+                            .caixaCor:hover {
+                                opacity: .3;
+                            }
+                            
+                            .escura {
+                                background: #000;
+                            }
+                            
+                            .vinho {
+                                background: rgba(120, 0, 220);
+                            }
+                            
+                            .azul {
+                                background: #0099ff50;
+                            }
+                            
+                            .amarela {
+                                background: rgba(255, 255, 0, .6);
+                            }
+                            
+                            .cinza {
+                                background: #aaa;
+                            }
+                            
+                            .vermelho {
+                                background: red;
+                            }
+                            
+                            .laranja {
+                                background: #ff9900;
+                            }
+                            
+                            .verde {
+                                background: #009900;
+                            }
+                            
+                            input[type="radio"] {
+                                display: none;
+                            }
+                        </style>
+                        <form action="::javascript">
+                            <input type="radio" id="escura" name="Cor" value="escura">
+                            <label for="escura"><div onclick="FechaModal()" class="caixaCor escura"> </div></label>
+                            <input type="radio" id="vinho" name="Cor" value="vinho">
+                            <label for="vinho"><div onclick="FechaModal()" class="caixaCor vinho"> </div></label>
+                            <input type="radio" id="azul" name="Cor" value="azul">
+                            <label for="azul"><div onclick="FechaModal()" class="caixaCor azul"> </div></label>
+                            <input type="radio" id="amarela" name="Cor" value="amarela">
+                            <label for="amarela"><div onclick="FechaModal()" class="caixaCor amarela"> </div></label>
+
+                            <input type="radio" id="cinza" name="Cor" value="cinza">
+                            <label for="cinza"><div onclick="FechaModal()" class="caixaCor cinza"> </div></label>
+                            <input type="radio" id="vermelho" name="Cor" value="vermelho">
+                            <label for="vermelho"><div onclick="FechaModal()" class="caixaCor vermelho"> </div></label>
+                            <input type="radio" id="laranja" name="Cor" value="laranja">
+                            <label for="laranja"><div onclick="FechaModal()" class="caixaCor laranja"> </div></label>
+                            <input type="radio" id="verde" name="Cor" value="verde">
+                            <label for="verde"><div onclick="FechaModal()" class="caixaCor verde"> </div></label>
+
+                        </form>
+                    </div>
+                    <div class="duplo">
+                        <button id="querApagar" type="button" class="btn btn-g" src="javascript::" onclick="QuerApagar()">Quer Apagar ?</button>
+                        <div class="div_apagar">
+                            <p> Tem certeza ? </p>
+                            <button class="btn sim" onclick="ApagaNota()"> Sim </button>
+                            <button class="btn nao" onclick="QuerApagar()"> Não </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="toolbar-container" style="display:block; width: 100%;margin: 0;">
+
+                <select class="ql-font">
+                    <option value="impact" selected>Impact</option>
+                    <option value="KitchenHome">KitchenHome</option>
+                    <option value="Comic">Comic Sans MS</option>
+                </select>
+
+                <!-- Add font size dropdown -->
+                <select class="ql-size">
+                    <option value="small">Pequeno</option>
+                    <!-- Note a missing, thus falsy value, is used to reset to default -->
+                    <option selected></option>
+                    <option value="large">Grande</option>
+                    <option value="huge">Gigante</option>
+                </select>
+
+
+                <button class="ql-bold">Negrito</button>
+                <button class="ql-italic">Italico</button>
+                <button class="ql-underline">Sublinhado</button>
+                <button class="ql-strike">Rasurado</button>
+
+                <button class="ql-image"></button>
+
+
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+
+
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+                <button class="ql-link"></button>
+
+
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-indent" value="-1"></button>
+                <button class="ql-indent" value="+1"></button>
+
+
+                <select class="ql-align"></select>
+
+                <!-- Add a bold button -->
+                <!-- Add subscript and superscript buttons -->
+            </div>
+
+            <!-- Create the editor container -->
+            <div id="editor">
+                <p><br></p>
+            </div>
+        </div>
+
+
+</body>
+
+
+<script src="modules/imports.js"></script>
+<script src="modules/logincadastro.js"></script>
+<script src="modules/procurar.js"></script>
+
+<script>
+    window.addEventListener('popstate', function(e) {
+        Load();
+
+        var loc = location.hash;
+        if (loc == "") {
+
+
+            //---------------------------------------------------------
+        } else {
+            stopLoad();
+        }
+
+    })
+
+    window.addEventListener('hashchange', function(e) {
+
+        if (location.hash == "#home") {
+            if (Nota.quill.isEnabled()) {
+                NaoPerde()
+            } else {
+                document.querySelector("#pesquisar").value = "";
+                document.querySelector("#chave").value = 0;
+                Nota.quill.setText('');
+                ativaEditor();
+            }
+            vaiTela();
+            document.querySelector(".modalDef").style.display = "none";
+            document.querySelector(".modalPes").style.display = "none";
+            stopLoad();
+        }
+
+        if (location.hash == "#nota") {
+            document.querySelector(".modalPes").style.display = "none";
+        }
+
+        if (location.hash == "#procurar") {
+            if (Nota.quill.isEnabled()) {
+                NaoPerde()
+            } else {
+                document.querySelector("#pesquisar").value = "";
+                document.querySelector("#chave").value = 0;
+                Nota.quill.setText('');
+                ativaEditor();
+            }
+            procurar();
+            document.querySelector(".modalPes").style.display = "block";
+        }
+
+        if (location.hash == "#conectar-se") {
+            var a = document.querySelector("#divConexao");
+            a.scrollLeft = 0;
+            tbAuth.getItem("email").then(function(i) {
+                if (i) {
+                    location.href = "#esqueci-passe";
+                    location.href = "#renovar-passe";
+                }
+            })
+        }
+
+        if (location.hash == "#registar-se") {
+            var a = document.querySelector("#divConexao");
+            a.scrollLeft = a.clientWidth;
+        }
+        if (location.hash == "#esqueci-passe") {
+            var a = document.querySelector("#divConexao");
+            a.scrollLeft = a.clientWidth * 2;
+            tbAuth.getItem("email").then(function(i) {
+                if (i) {
+                    location.href = "#renovar-passe";
+                }
+            })
+        }
+        if (location.hash == "#renovar-passe") {
+            var a = document.querySelector("#divConexao");
+            a.scrollLeft = a.clientWidth * 3;
+        }
+    })
+</script>
+
+</html>
