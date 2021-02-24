@@ -1,0 +1,648 @@
+@font-face {
+    font-family: KitchenHome;
+    src: url(KitchenHome.ttf)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.animate {
+    animation-duration: 4s;
+    /* don't forget to set a duration! */
+}
+
+#oAppEmSi {
+    display: block;
+    width: 100%;
+}
+
+#elementos ::-webkit-scrollbar {
+    width: 1px;
+    scroll-behavior: smooth;
+}
+
+
+/* Track */
+
+#elementos::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+
+
+/* Handle */
+
+#elementos ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0);
+}
+
+
+/* Handle on hover */
+
+#elementos ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+    scroll-behavior: smooth;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0);
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0);
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+#cabeca {
+    width: 94%;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 2% 3%;
+    background: #eaeaea;
+    border-bottom: 1px solid #00000035;
+}
+
+#acao {
+    width: 5%;
+    float: right;
+    margin-left: 6.5px;
+}
+
+#pesqui {
+    display: inline-block;
+    width: 10%;
+    height: 35px;
+}
+
+#voltar {
+    display: inline-block;
+    width: 5%;
+}
+
+#calendario {
+    display: block;
+    width: 5%;
+    float: right;
+}
+
+#controle {
+    display: block;
+    width: 5%;
+    float: right;
+    margin-right: 6.5px;
+}
+
+#tela {
+    display: block;
+    width: 100%;
+    height: 93.6vh;
+    margin: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+}
+
+#telaDois {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+#scrollHome {
+    width: 200%;
+    height: 100%;
+    margin: 0;
+}
+
+#elementos,
+#wrapper {
+    width: 48.7%;
+    height: 92.3vh;
+    margin: 0;
+    padding: 0 0.5%;
+    overflow-y: scroll;
+    display: block;
+    position: relative;
+}
+
+#elementos {
+    float: left;
+}
+
+#wrapper {
+    float: right;
+}
+
+#elementos ul {
+    list-style: none;
+    width: 100%;
+}
+
+#elementos ul a {
+    margin: 0;
+}
+
+#elementos ul li {
+    clear: both;
+}
+
+#element {
+    width: 97%;
+    display: block;
+    margin: .6px 0;
+    padding: 5px 2%;
+}
+
+#element h4 {
+    font-size: 20px;
+    line-height: 22px;
+    margin: 0;
+}
+
+#element p {
+    font-size: 10px;
+    line-height: 10px;
+    margin: 3px 2px 2px 0px;
+}
+
+#texto {
+    overflow: hidden;
+    display: block;
+    width: 90%;
+    height: 90vh;
+    border: none;
+    background: #78000016;
+    padding: 10% 5%;
+    font-size: 22px;
+    resize: none;
+}
+
+#texto:focus {
+    outline: none
+}
+
+#pesquisar {
+    display: inline-block;
+    width: 75%;
+    height: 30px;
+    color: #aaa;
+    background: white;
+    font-size: 19px;
+    border: none;
+}
+
+#pesquisar:focus {
+    outline: none
+}
+
+#acao:focus {
+    outline: none
+}
+
+input:focus {
+    outline: none
+}
+
+.inputTarefa:focus,
+.inputTarefa:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.inputTarefa:focus-visible {
+    border: none;
+    box-shadow: none;
+}
+
+.inputTarefa:focus-within {
+    border: none;
+    box-shadow: none;
+}
+
+#editor {
+    height: 90vh;
+}
+
+.modalRapido {
+    display: none;
+}
+
+.rapidoOverlay,
+.rapidoOverlayy {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 999
+}
+
+.rapidoConteudo {
+    position: fixed;
+    top: 10%;
+    left: 14%;
+    width: 70%;
+    background: #fff;
+    z-index: 999
+}
+
+.dataDoModal {
+    display: block;
+    width: 98%;
+    margin: 0 auto;
+    background: #aaa;
+    padding: 1%;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.padding {
+    padding: 5px;
+}
+
+.noPadding {
+    padding: 0;
+}
+
+.quadrado {
+    width: 10.5%;
+    height: 32px;
+    display: block;
+    float: right;
+    margin: 0 0 0 5px;
+    background: #cccc;
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.59);
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.59);
+    border: none;
+}
+
+.duplo {
+    display: inline-block;
+    width: 45%;
+    margin: 1%;
+    padding: 1%;
+}
+
+.div_apagar {
+    display: none;
+    border: 0.3px solid #eaeaea
+}
+
+.div_apagar p {
+    font-size: 17px;
+    text-align: center;
+}
+
+.sim,
+.nao {
+    display: inline-block;
+    width: 40%;
+    margin: 4% 0 4% 5.8%;
+}
+
+.sim {
+    color: red
+}
+
+.sim {
+    color: green
+}
+
+.btn {
+    background: #999999;
+    font-size: 13px;
+    box-shadow: none;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.btn-g {
+    width: 100%;
+    border-radius: 0;
+}
+
+#querApagar {
+    display: none;
+}
+
+.divLoad {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #00000010;
+    z-index: 9999;
+    display: none;
+}
+
+#divConexao {
+    width: 100%;
+    height: 100vh;
+    background: #eaeaea;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+#divAuthTrue {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    background: #009999;
+}
+
+#divAuthTrue h2 {
+    font-family: KitchenHome;
+    text-align: center;
+    margin: 10px;
+    line-height: 28px;
+    font-size: 26px;
+    color: white;
+}
+
+#divAuthTrue p {
+    font-size: 13px;
+    text-align: center;
+    line-height: 17px;
+}
+
+#botaoSincronizar {
+    display: block;
+    margin: 0 auto;
+    background: none;
+    font-size: 16px;
+    padding: 1%;
+    font-weight: bold;
+    width: 80%;
+    box-shadow: none;
+    border: 0.1px solid #eaeaea;
+    opacity: .7;
+    position: absolute;
+    bottom: 100px;
+    left: 10%;
+    color: white;
+}
+
+#scrollConexao {
+    width: 400%;
+    height: 100vh;
+}
+
+#registar-se {
+    width: 25%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    float: right;
+}
+
+#registar-se h2 {
+    font-family: KitchenHome;
+    text-align: center;
+    margin: 10px;
+    line-height: 28px;
+    font-size: 26px;
+    margin-top: 55px;
+    color: white;
+}
+
+#conectar-se {
+    width: 25%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    float: left;
+}
+
+#conectar-se h2 {
+    font-family: KitchenHome;
+    text-align: center;
+    margin: 10px;
+    line-height: 28px;
+    font-size: 26px;
+    margin-top: 55px;
+    color: white;
+}
+
+#conectar-se p {
+    text-align: center;
+    margin: 10px;
+}
+
+.div_form {
+    width: 100%;
+    margin-top: 60px;
+    padding: 10%;
+}
+
+.div_form input[type=email],
+.inputText {
+    width: 80%;
+    height: 25px;
+    border-radius: 2px;
+    text-align: center;
+    opacity: .7;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 3px;
+}
+
+.inputPes {
+    width: 100%;
+    height: 27px;
+    text-align: center;
+    opacity: .7;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 1px;
+}
+
+.div_form input[type=password] {
+    width: 80%;
+    height: 25px;
+    border-radius: 2px;
+    text-align: center;
+    opacity: .7;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 3px;
+}
+
+.div_form button {
+    background: none;
+    font-size: 16px;
+    padding: 1%;
+    font-weight: bold;
+    width: 80%;
+    box-shadow: none;
+    border: 0.1px solid #eaeaea;
+    opacity: .7;
+}
+
+.div_baixa {
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    padding: 0 10%;
+}
+
+.div_baixa a {
+    color: white;
+    text-align: center;
+    display: block;
+    margin: 0 0;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 1%;
+    font-weight: bold;
+    width: 77%;
+    background: none;
+}
+
+#renovar-passe {
+    width: 25%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    float: right;
+}
+
+#renovar-passe h2 {
+    font-family: KitchenHome;
+    text-align: center;
+    margin: 10px;
+    line-height: 28px;
+    font-size: 26px;
+    margin-top: 45px;
+    color: white;
+}
+
+#esqueci-passe {
+    width: 25%;
+    height: 100vh;
+    display: block;
+    position: relative;
+    float: right;
+}
+
+#esqueci-passe h2 {
+    font-family: KitchenHome;
+    text-align: center;
+    margin: 10px;
+    line-height: 28px;
+    font-size: 26px;
+    margin-top: 55px;
+    color: white;
+}
+
+.esqueci-passe {
+    color: black;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+#elementosPesq {
+    width: 99%;
+    height: 92.3vh;
+    margin: 0;
+    padding: 0 0.5%;
+    overflow-y: scroll;
+    display: block;
+    position: relative;
+}
+
+#elementosPesq ul {
+    list-style: none;
+    width: 100%;
+}
+
+#elementosPesq ul a {
+    margin: 0;
+}
+
+#elementosPesq ul li {
+    clear: both;
+}
+
+@media screen and (max-width: 500px) {
+    #fundo {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+    #fundo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    #tela {
+        width: 100%;
+        margin: 2px auto 0 auto;
+        box-shadow: none;
+    }
+    #element {
+        display: block;
+        margin: 2px auto;
+    }
+    #element h4 {
+        font-size: 18px;
+        line-height: 19px;
+        margin: 0;
+    }
+    #element p {
+        font-size: 10px;
+        line-height: 10px;
+        margin: 1.5px 1px 1px 0px;
+    }
+    #acao {
+        width: 10.6%;
+    }
+    #voltar,
+    #calendario,
+    #controle {
+        width: 10%;
+    }
+}
