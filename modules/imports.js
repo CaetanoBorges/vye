@@ -60,6 +60,11 @@ var quill = function() {
         // ['clean']                                     // remove formatting button
     ];
 
+    // Add fonts to whitelist
+    var FontAttributor = Quill.import('attributors/class/font');
+    FontAttributor.whitelist = ['Branda', 'Brilho', 'Minimum', 'Outline', 'Realeza', 'Desenho3D', 'KitchenHome'];
+    Quill.register(FontAttributor, true);
+
     var quill = new Quill('#editor', {
         modules: {
             toolbar: { container: "#toolbar-container" }
@@ -287,12 +292,7 @@ var SetBuffer = function(id, arra) {
     })
 }
 var QuerApagar = function() {
-    var x = document.querySelector(".div_apagar");
-    if (x.style.display == 'none') {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+    $(".div_apagar").toggle("slow");
 }
 var ApagaNota = function() {
     Load();

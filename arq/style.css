@@ -1,6 +1,98 @@
 @font-face {
     font-family: KitchenHome;
-    src: url(KitchenHome.ttf)
+    src: url('Font/KitchenHome.ttf')
+}
+
+@font-face {
+    font-family: Branda;
+    src: url('Font/Branda.ttf')
+}
+
+@font-face {
+    font-family: Brilho;
+    src: url('Font/Brilho.ttf')
+}
+
+@font-face {
+    font-family: Desenho3D;
+    src: url('Font/desenho3d.otf')
+}
+
+@font-face {
+    font-family: Minimum;
+    src: url('Font/Minimum.otf')
+}
+
+@font-face {
+    font-family: Outline;
+    src: url('Font/Outline.ttf')
+}
+
+@font-face {
+    font-family: Realeza;
+    src: url('Font/Realeza.ttf')
+}
+
+
+/* Set dropdown font-families */
+
+#toolbar-container .ql-font span[data-label="Branda"]::before {
+    font-family: "Branda";
+}
+
+#toolbar-container .ql-font span[data-label="Brilho"]::before {
+    font-family: "Brilho";
+}
+
+#toolbar-container .ql-font span[data-label="Minimum"]::before {
+    font-family: "Minimum";
+}
+
+#toolbar-container .ql-font span[data-label="Outline"]::before {
+    font-family: "Outline";
+}
+
+#toolbar-container .ql-font span[data-label="Realeza"]::before {
+    font-family: "Realeza";
+}
+
+#toolbar-container .ql-font span[data-label="Desenho3D"]::before {
+    font-family: "Desenho3D";
+}
+
+#toolbar-container .ql-font span[data-label="KitchenHome"]::before {
+    font-family: "KitchenHome";
+}
+
+
+/* Set content font-families */
+
+.ql-font-Branda {
+    font-family: "Branda";
+}
+
+.ql-font-Brilho {
+    font-family: "Brilho";
+}
+
+.ql-font-Minimum {
+    font-family: "Minimum";
+}
+
+.ql-font-Outline {
+    font-family: "Outline";
+}
+
+.ql-font-Realeza {
+    font-family: "Realeza";
+}
+
+.ql-font-Desenho3D {
+    font-family: "Desenho3D";
+}
+
+.ql-font-KitchenHome {
+    font-family: "KitchenHome";
 }
 
 * {
@@ -276,7 +368,8 @@ input:focus {
     left: 14%;
     width: 70%;
     background: #fff;
-    z-index: 999
+    z-index: 999;
+    border-radius: 5px;
 }
 
 .dataDoModal {
@@ -321,6 +414,12 @@ input:focus {
     padding: 1%;
 }
 
+.row {
+    width: 92%;
+    padding: 4%;
+    display: block;
+}
+
 .div_apagar {
     display: none;
     border: 0.3px solid #eaeaea
@@ -360,7 +459,10 @@ input:focus {
 }
 
 #querApagar {
+    width: 100%;
     display: none;
+    height: fit-content;
+    padding: 10px;
 }
 
 .divLoad {
